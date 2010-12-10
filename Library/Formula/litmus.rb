@@ -7,7 +7,7 @@ class Litmus <Formula
 
   def install
     # Just basic options for now. We could use --with-ssl or alternative neon using dependency tracking?
-    system "./configure", "--prefix=#{prefix}", "--disable-debug", "--disable-dependency-tracking"
+    system "./configure", "--prefix=#{prefix}", "--disable-debug", "--disable-dependency-tracking", "--with-ssl"
     system "make install"
   end
 end
