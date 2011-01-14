@@ -7,6 +7,7 @@ class Graphviz <Formula
 
   depends_on 'pkg-config' => :build
   depends_on 'pango'
+  depends_on 'cairo'
 
   def install
     ENV.x11
