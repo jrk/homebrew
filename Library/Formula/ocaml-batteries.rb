@@ -11,9 +11,28 @@ class OcamlBatteries < Formula
   depends_on 'ocaml-ounit'
 
   def install
+    ENV.deparallelize
+    ENV['DOCROOT'] = "#{prefix}/share/doc/ocaml-batteries"
+    ENV['DESTDIR'] = "#{prefix}/lib/ocaml/site-lib"
+    system "mkdir", "-p", "#{ENV['DESTDIR']}"
     system "make all"
     system "make install"
     system "make doc"
     system "make install-doc"
+    ohai 'To get started using Batteries at the toplevel, copy the following
+into `~/.ocamlinit`:
+-----------------------------------------------------------------------------
+let interactive = !Sys.interactive;;
+Sys.interactive := false;; (*Pretend to be in non-interactive mode*)
+#use "topfind";;
+Sys.interactive := interactive;; (*Return to regular interactive mode*)
+
+Toploop.use_silently 
+             Format.err_formatter (Filename.concat (Findlib.package_directory 
+             "batteries") "battop.ml");;
+-----------------------------------------------------------------------------
+If you already have findlib in your `~/.ocamlinit`, you only need the
+last line in our ocamlinit to load batteries.
+'
   end
 end

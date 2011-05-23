@@ -8,7 +8,8 @@ class OcamlFindlib < Formula
   depends_on 'objective-caml'
 
   def install
-    system "./configure", "-bindir=#{prefix}/bin"
+    ENV.deparallelize
+    system "./configure", "-bindir", "#{prefix}/bin"
     system "make", "all"
     system "make", "opt"
     system "make", "install"

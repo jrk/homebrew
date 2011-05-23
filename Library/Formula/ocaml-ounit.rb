@@ -9,7 +9,8 @@ class OcamlOunit < Formula
   depends_on 'ocaml-findlib'
 
   def install
-    system "ocaml", "setup.ml", "-configure", "--prefix=#{prefix}"
+    ENV.deparallelize
+    system "ocaml", "setup.ml", "-configure", "--prefix", "#{prefix}"
     system "ocaml", "setup.ml", "-build"
     system "ocaml", "setup.ml", "-install"
   end

@@ -8,7 +8,9 @@ class OcamlCamomile < Formula
   depends_on 'objective-caml'
 
   def install
+    ENV.deparallelize
     system "./configure", "--prefix=#{prefix}"
-    system "make install"
+    system "make"
+    system "make", "install"
   end
 end
